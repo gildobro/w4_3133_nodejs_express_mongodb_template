@@ -31,16 +31,32 @@ const EmployeeSchema = new mongoose.Schema({
 });
 
 //Declare Virtual Fields
-
+EmployeeSchema.virtual('fullname')
+              .get(function(){
+                  return `${this.firstname} ${this.lastname}`
+              })
+              .set(function(fullname){
+                fullname = fullname.split(' ');
+                this.name = fullname[0];
+                this.lastname = fullname[1];
+              })
 
 //Custom Schema Methods
 //1. Instance Method Declaration
-
+EmployeeSchema.methods.getFullName = function(){
+  console.log(`Full Name : ${this.firstname} ${this.lastname}`)
+  return `${this.firstname} ${this.lastname}`
+}
 
 //2. Static method declararion
-
+EmployeeSchema.statics.getEmployeeByFirstName = function(value){
+  return this.find({firstname : value })
+}
 
 //Writing Query Helpers
+EmployeeSchema.query.byFirstName = function(name) {
+  return this.where({ name: name, })
+}
 
 
 

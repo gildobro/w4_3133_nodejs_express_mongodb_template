@@ -45,7 +45,7 @@ app.get('/employees/firstname/:name', async (req, res) => {
   //console.log(employees[0].fullname)
 
   //Using Instance method
-  //console.log(employees[0].getFullName())
+  console.log(employees[0].getFullName())
 
   //Using Static method
   //const employees = await employeeModel.getEmployeeByFirstName(name)
