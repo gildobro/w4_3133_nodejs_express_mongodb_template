@@ -166,10 +166,10 @@ app.post('/employee', async (req, res) => {
       await employee.save((err) => {
         if(err){
           //Custome error handling
-          //console.log(err.errors['firstname'].message)
-          //console.log(err.errors['lastname'].message)
-          //console.log(err.errors['gender'].message)
-          //console.log(err.errors['salary'].message)
+          console.log(err.errors['firstname'].message)
+          console.log(err.errors['lastname'].message)
+          console.log(err.errors['gender'].message)
+          console.log(err.errors['salary'].message)
           res.send(err)
         }else{
           res.send(employee);
@@ -230,7 +230,7 @@ app.get('/employee/delete', async (req, res) => {
 module.exports = app
 
 //Insert Multiple Records
-/*
+
 employeeModel.create(
   [{"firstname":"Keriann","lastname":"Qualtro","email":"kqualtro3@mediafire.com","gender":"Female","city":"Ulricehamn","designation":"Nurse Practicioner","salary":"9288.95"},
   {"firstname":"Bette","lastname":"Elston","email":"belston4@altervista.org","gender":"Female","city":"Xinhang","designation":"Staff Accountant III","salary":"3086.99"},
@@ -238,4 +238,3 @@ employeeModel.create(
   {"firstname":"Letizia","lastname":"Walrond","email":"lwalrond6@ibm.com","gender":"Male","city":"Ricardo Flores Magon","designation":"Research Associate","salary":"6329.05"},
   {"firstname":"Molly","lastname":"MacTrustrie","email":"mmactrustrie7@adobe.com","gender":"Female","city":"Banjarejo","designation":"Quality Control Specialist","salary":"4059.61"}]
 )
-*/
