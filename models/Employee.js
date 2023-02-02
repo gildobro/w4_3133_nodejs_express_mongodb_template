@@ -28,9 +28,15 @@ const EmployeeSchema = new mongoose.Schema({
   salary: {
     type: Number,
     required: true,
+    validate(value){
+      if(value < 0.0){
+        throw new Error("Negative Salary is not allowed")
+      }
+    }
   },
   created: { 
-    type: Date
+    type: Date,
+    default: Date.now
   },
   updatedat: { 
     type: Date
@@ -42,11 +48,11 @@ EmployeeSchema.virtual('fullname')
               .get(function(){
                   return `${this.firstname} ${this.lastname}`
               })
-              .set(function(fullname){
-                fullname = fullname.split(' ');
-                this.name = fullname[0];
-                this.lastname = fullname[1];
-              })
+              // .set(function(fullname){
+              //   fullname = fullname.split(' ');
+              //   this.name = fullname[0];
+              //   this.lastname = fullname[1];
+              // })
 
 //Custom Schema Methods
 //1. Instance Method Declaration
@@ -55,14 +61,22 @@ EmployeeSchema.methods.getFullName = function(){
   return `${this.firstname} ${this.lastname}`
 }
 
+EmployeeSchema.methods.getFormattedSalary = function(){
+  return `$${this.salary}`
+}
+
 //2. Static method declararion
-EmployeeSchema.statics.getEmployeeByFirstName = function(value){
-  return this.find({firstname : value })
+EmployeeSchema.statics.getEmployeeById = function(eid){
+  return this.find({_id: eid }).select("firstname lastname salary designation");
+}
+
+EmployeeSchema.statics.getEmployeeByFirstName = function(name){
+  return this.find({name: name }).select("firstname lastname salary designation");
 }
 
 //Writing Query Helpers
-EmployeeSchema.query.byFirstName = function(name) {
-  return this.where({ name: name, })
+EmployeeSchema.query.sortByFirstName = function(flag) { //flag -1 OR 1
+  return this.sort({ 'lastname': flag, })
 }
 
 
