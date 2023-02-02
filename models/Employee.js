@@ -6,22 +6,28 @@ const EmployeeSchema = new mongoose.Schema({
     required: [true, "Provide First Name"]
   },
   lastname: {
-    type: String
+    type: String,
+    required: true,
   },
   email: {
-    type: String
+    type: String,
+    required: true,
   },
   gender: {
-    type: String
+    type: String,
+    required: true,
   },
   city:{
-    type: String
+    type: String,
+    required: true,
   },
   designation: {
-    type: String
+    type: String,
+    required: true,
   },
   salary: {
-    type: Number
+    type: Number,
+    required: true,
   },
   created: { 
     type: Date
