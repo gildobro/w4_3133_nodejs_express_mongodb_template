@@ -128,7 +128,7 @@ app.get('/employees/salary', async (req, res) => {
 app.get('/employees/test', async (req, res) => {
   try {
     const employees = employeeModel.
-                        find({})
+                        find({_id:0})
                         .where('lastname').equals('dobrovinsky')
                         .where('salary').gte(1000.00).lte(10000.00)
                         .where('firstname').in(['gil', 'moksh'])
